@@ -152,7 +152,7 @@ sequenceDiagram
 
     Operator->>Control: /follower/enable (Trigger)
     alt Calibration flag false or LiDAR scan stale
-        Control-->>Operator: Reject; continue publishing zero Twist
+        Control-->>Operator: Rejected, zero Twist continues
     else Ready
         Control-->>Operator: Enabled
         loop Every image / cloud update
