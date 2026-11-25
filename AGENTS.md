@@ -1,6 +1,6 @@
 # AGENTS.md — Go2 Human Follower
 
-This file is the current working guide for coding agents in this repository. Read it together with [README.md](README.md) before changing code. The [implementation plan](docs/superpowers/plans/2026-11-23-go2-follower.md) records how the first version was built; check the current source before treating a plan or example value as fact.
+This file is the current working guide for coding agents in this repository. Read it together with [README.md](README.md) and the current [architecture](docs/ARCHITECTURE.md) before changing code. The [implementation plan](docs/superpowers/plans/2026-11-23-go2-follower.md) records how the first version was built; check the current source before treating a plan or example value as fact.
 
 ## Project boundary
 
@@ -11,7 +11,7 @@ This file is the current working guide for coding agents in this repository. Rea
 
 ## Current state — checked 2026-11-25
 
-- Four ROS 2 packages and their launch/config files exist. The pure Python suite passed **16 tests** at the initial commit (`7f9e838`); Python syntax, package XML, YAML, and Compose configuration were parsed successfully. Re-run checks before claiming current results.
+- Four ROS 2 packages and their launch/config files exist. The pure Python suite passed **16 tests**; Python syntax, package XML, YAML, and Compose configuration were parsed successfully. Re-run checks before claiming current results.
 - **No ROS 2/`colcon` build or Docker image build was run in the development environment. No Go2/Jetson test, sensor calibration, collision-avoidance validation, or stop-latency measurement has been completed.** Do not describe the stack as hardware verified or production ready.
 - The Go2 camera service, `/utlidar/cloud` availability/type/QoS, actual frame transforms, model frame rate, and `/cmd_vel` stopping behavior must be checked on the target Jetson.
 - `calibration_verified` defaults to `false`; `/follower/enable` refuses live motion until an operator measures calibration, sets that parameter true, and provides a fresh LiDAR scan. The offline launch redirects velocity output away from `/cmd_vel`.
@@ -69,5 +69,5 @@ ros2 launch go2_follower_bringup sim_or_offline.launch.py camera_source:=disable
 1. Check Git status and read the relevant current files before relying on notes or an old plan. Preserve unrelated user changes.
 2. Keep sensor ingestion, perception, and motion control separate. Keep pure tracking/fusion/control logic testable without ROS imports; put ROS I/O in node modules.
 3. Add or adjust focused tests for behavior changes, especially lock identity, stale inputs, obstacle proximity, braking, and target loss. Run the full pure Python suite and any ROS/Docker checks available in the environment; report exactly what ran.
-4. Update `README.md`, this file, and `CLAUDE.md` when interfaces, safety behavior, deployment steps, or verified status change. Distinguish code behavior from hardware observations and assumptions.
+4. Update `README.md`, [architecture](docs/ARCHITECTURE.md), this file, and `CLAUDE.md` when interfaces, safety behavior, deployment steps, or verified status change. Distinguish code behavior from hardware observations and assumptions.
 5. Before any public push, inspect staged files for weights, bags, credentials, private URLs, and corporate content. Use a personal commit identity. Do not claim on-hardware success from local tests.

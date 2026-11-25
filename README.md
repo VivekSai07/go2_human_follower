@@ -1,5 +1,7 @@
 # Go2 Human Follower
 
+**Architecture:** [System diagrams, package boundaries, safety states, and launch modes](docs/ARCHITECTURE.md).
+
 Standalone ROS 2 Humble prototype for selecting one person and following them with a Unitree Go2. The project uses standard ROS 2 messages and the public Unitree SDK2 Python camera API.
 
 **Status:** logic tested off-robot; live Go2 sensor geometry, model throughput, bridge behavior, and stopping distance still require on-robot validation. Keep the remote operator ready to stop the robot. The 0.35 m bubble is a software protective stop, not a certified emergency stop.
