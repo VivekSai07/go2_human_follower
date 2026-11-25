@@ -1,0 +1,13 @@
+services:
+  follower:
+    build: .
+    platform: linux/arm64
+    network_mode: host
+    ipc: host
+    environment:
+      ROS_DOMAIN_ID: ${ROS_DOMAIN_ID:-0}
+      RMW_IMPLEMENTATION: rmw_cyclonedds_cpp
+      UNITREE_NET_IFACE: ${UNITREE_NET_IFACE:-eth0}
+    volumes:
+      - ./models:/models:ro
+    restart: "no"
